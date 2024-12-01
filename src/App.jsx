@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 // Components
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
+import Footer from "./components/Footer";
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
         </Route>
         <Route path="*" element={ <h1>404 Not Found :C</h1> } />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
