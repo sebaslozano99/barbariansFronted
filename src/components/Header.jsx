@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-const scrollThreshold = 575;
+const scrollThreshold = 590;
 
 export default function Header() {
 
@@ -42,7 +42,7 @@ export default function Header() {
       </h1>
 
       <nav>
-        <ul className="flex items-center gap-10" >
+        <ul className="flex items-center gap-10 text-lg" >
           <li>
             <NavLink to="/" >Home</NavLink>
           </li>
@@ -56,7 +56,7 @@ export default function Header() {
             <NavLink to="/contact" >Contact</NavLink>
           </li>
           <li>
-            <NavLink to="/auth/login" >Log in</NavLink>
+            <NavLink to="/auth/login" className="text-yellow-500" >Log in</NavLink>
           </li>
         </ul>
       </nav>
