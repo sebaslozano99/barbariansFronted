@@ -7,12 +7,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Auth = lazy(() => import("./pages/Auth"));
 const Homepage = lazy(() => import("./pages/Homepage"));
 const About = lazy(() => import("./pages/About"));
-const Contacts = lazy(() => import("./pages//Contacts"));
+const Contacts = lazy(() => import("./pages/Contacts"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 
 // Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import LogInForm from "./components/LogInForm";
+import SignupForm from "./components/SignupForm";
 
 
 
@@ -26,11 +29,11 @@ export default function App() {
           <Route path="/barbers" element={ <h1>Barbers</h1> } />
           <Route path="/about" element={ <About /> } />
           <Route path="/contact" element={ <Contacts /> } />
-          <Route path="*" element={ <h1>404 Not Found :C</h1> } />
+          <Route path="*" element={ <NotFound /> } />
 
           <Route path="/auth" element={ <Auth /> }>
-            <Route path="/auth/login" element={ <h1>Log in</h1> } />
-            <Route path="/auth/signup" element={ <h1>Sign up</h1> } />
+            <Route path="/auth/login" element={ <LogInForm /> } />
+            <Route path="/auth/signup" element={ <SignupForm /> } />
           </Route>
         </Routes>
         <Footer />
