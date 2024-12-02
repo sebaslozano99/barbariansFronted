@@ -1,6 +1,5 @@
 
 
-
 export default function Footer() {
   return (
     <footer className="grid grid-cols-4 gap-4 p-8 mt-24 w-full h-72 bg-[#252525]" >
@@ -13,10 +12,10 @@ export default function Footer() {
         <h3 className="text-4xl font-semibold text-white text-center" >PRODUCT</h3>
 
         <ul className="flex flex-col gap-2 text-center" >
-          <li><a className="text-white text-xl hover:underline" href="#">Features</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Security</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Pricing</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Resources</a></li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Features</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Security</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Pricing</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Resources</li>
         </ul>
       </div>
 
@@ -25,10 +24,10 @@ export default function Footer() {
         <h3 className="text-4xl font-semibold text-white text-center" >SUPPORT</h3>
 
         <ul className="flex flex-col gap-2 text-center" >
-          <li><a className="text-white text-xl hover:underline" href="#">HELP</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Community</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Forum</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Training</a></li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >HELP</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Community</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Forum</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Training</li>
         </ul>
       </div>
 
@@ -37,9 +36,9 @@ export default function Footer() {
         <h3 className="text-4xl font-semibold text-white text-center" >Company</h3>
 
         <ul className="flex flex-col gap-2 text-center" >
-          <li><a className="text-white text-xl hover:underline" href="#">About</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Blog</a></li>
-          <li><a className="text-white text-xl hover:underline" href="#">Carrers</a></li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >About</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Blog</li>
+          <li className="text-white text-xl cursor-pointer hover:underline" >Careers</li>
         </ul>
       </div>
 

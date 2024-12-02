@@ -23,20 +23,20 @@ export default function Homepage() {
         </div>
 
         <div className="flex justify-center items-center gap-10 p-10 h-full" >
-          <img src="/scissors.jpg" alt="scissors-background" className="h-full" />
-          <img src="/barbershopTwo.jpg" alt="scissors-background" className="h-full" />
+          <img src="/scissors.jpg" alt="scissors-background" className="h-full" loading="lazy" />
+          <img src="/barbershopTwo.jpg" alt="barbershopTwo" className="h-full" loading="lazy" />
         </div>
 
       </section>
 
 
       <section className="p-4 w-full h-[90vh]" >
-        <h2 className="text-6xl font-semibold text-center" >BARBARIANS SERVICES</h2>
+        <h2 className="text-6xl font-semibold text-center" >BARBARIANS ADVANTAGES</h2>
 
         <div className="grid grid-cols-4 gap-3 p-4 w-full h-[90%]" >
 
-          <div className="flex flex-col h-full border-[1px] border-black/50" >
-            <img src="/barberOne.jpg" alt="barberOne" className="h-[310px] bg-cover" />
+          <div className="flex flex-col h-full" >
+            <img src="/barberOne.jpg" alt="barberOne" className="h-[310px] bg-cover" loading="lazy" />
 
             <div className="flex flex-col gap-2 p-2" >
               <h3 className="text-2xl font-semibold text-center" >SAVE TIME</h3>
@@ -44,8 +44,8 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="flex flex-col h-full border-[1px] border-black/50" >
-            <img src="/barberTwo.jpg" alt="barberTwo" className="h-[310px]" />
+          <div className="flex flex-col h-full" >
+            <img src="/barberTwo.jpg" alt="barberTwo" className="h-[310px]" loading="lazy" />
 
             <div className="flex flex-col gap-2 p-2" >
               <h3 className="text-2xl font-semibold text-center" >FIND THE BEST BARBERS</h3>
@@ -53,8 +53,8 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="flex flex-col h-full border-[1px] border-black/50" >
-            <img src="/barberThree.jpg" alt="barberThree" className="h-[310px] bg-cover" />
+          <div className="flex flex-col h-full" >
+            <img src="/barberThree.jpg" alt="barberThree" className="h-[310px] bg-cover" loading="lazy" />
 
             <div className="flex flex-col gap-2 p-2" >
               <h3 className="text-2xl font-semibold text-center" >SET YOUR APPOINTMENTS</h3>
@@ -62,8 +62,8 @@ export default function Homepage() {
             </div>
           </div>
 
-          <div className="flex flex-col h-full border-[1px] border-black/50" >
-            <img src="/scissorsThree.jpg" alt="scissorsThree" className="h-[310px] bg-contain" />
+          <div className="flex flex-col h-full" >
+            <img src="/scissorsThree.jpg" alt="scissorsThree" className="h-[310px] bg-contain" loading="lazy" />
 
             <div className="flex flex-col gap-2 p-2" >
               <h3 className="text-2xl font-semibold text-center" >SECURE PAYMENTS</h3>
