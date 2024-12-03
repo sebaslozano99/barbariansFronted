@@ -1,6 +1,9 @@
 import { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
+import { useMutation } from '@tanstack/react-query';
+import { signup } from '../services/userAuth';
+import toast from 'react-hot-toast';
 
 
 const initialState = {
@@ -62,8 +65,17 @@ export default function SignupForm() {
 
   const [{first_name, last_name, email, password, confirm_password, role}, dispatch] = useReducer(reducer, initialState);
 
+  const { mutate } = useMutation({
+    mutationFn: (e) => signup(e, first_name, last_name, email, password, confirm_password, role),
+    onSuccess: (data) => toast.success(data.message),
+    onError: (error) => toast.error(error.message),
+  });
+
   return (
-    <form className="flex flex-col gap-4 mt-20 w-[40em]" >
+    <form 
+      onSubmit={mutate}
+      className="flex flex-col gap-4 mt-20 w-[40em]" 
+    >
       <h2 className="p-2 text-white text-xl w-full bg-[#252525]" >Create account</h2>
 
       <PasswordInput

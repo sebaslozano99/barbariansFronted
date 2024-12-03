@@ -5,10 +5,6 @@
 @tailwind utilities;
 
 
-*{
-    font-family: "Bebas Neue", sans-serif;
-}
-
 .active {
     text-decoration: underline;
 }

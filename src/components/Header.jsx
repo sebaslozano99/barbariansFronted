@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
+
 const scrollThresholdHome = 590;
 const scrollThresholdAboutContact = 336;
+
+
+
 
 export default function Header() {
 
@@ -32,7 +36,6 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     }
   }, [handleScroll]);
-
 
 
   return (

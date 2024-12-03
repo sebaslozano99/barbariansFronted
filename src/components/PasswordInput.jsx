@@ -19,7 +19,7 @@ export default function PasswordInput({label, idName, type = "password", inputVa
           value={inputValue}
           onChange={(e) => onChangeFunc(e)}
           placeholder={placeholder}
-          className="px-4 py-2 w-[80%] border-[1px] border-[#252525]/30"
+          className="px-4 py-2 w-[80%] font-sans border-[1px] border-[#252525]/30"
           required 
         />
 
@@ -50,7 +50,7 @@ export default function PasswordInput({label, idName, type = "password", inputVa
           value={inputValue}
           onChange={(e) => onChangeFunc(e)}
           placeholder={placeholder}
-          className="px-4 py-2 w-[80%] border-[1px] border-[#252525]/30"
+          className="px-4 py-2 font-sans w-[80%] border-[1px] border-[#252525]/30"
           required 
         />
       </div>
