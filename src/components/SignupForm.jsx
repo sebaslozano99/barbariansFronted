@@ -1,9 +1,10 @@
 import { useReducer } from 'react';
-import { Link } from 'react-router-dom';
-import PasswordInput from './PasswordInput';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { signup } from '../services/userAuth';
+import PasswordInput from './PasswordInput';
 import toast from 'react-hot-toast';
+import Spinner from './Spinner';
 
 
 const initialState = {
@@ -64,12 +65,19 @@ function reducer(state, action){
 export default function SignupForm() {
 
   const [{first_name, last_name, email, password, confirm_password, role}, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
 
-  const { mutate } = useMutation({
+
+  const { mutate, isPending } = useMutation({
     mutationFn: (e) => signup(e, first_name, last_name, email, password, confirm_password, role),
-    onSuccess: (data) => toast.success(data.message),
+    onSuccess: (data) => {
+      if(role === "user") navigate("/barbers");
+      else navigate("/barbershop-edit");
+      toast.success(data.message);
+    },
     onError: (error) => toast.error(error.message),
   });
+
 
   return (
     <form 
@@ -139,7 +147,7 @@ export default function SignupForm() {
       
 
       <div className="flex items-center justify-end gap-6" >
-        <button className="px-8 py-1 text-white text-lg bg-[#252525] " >Sign up</button>
+        <button className="flex justify-center items-center px-8 py-1 text-white text-lg w-28 h-10 bg-[#252525] " >{isPending ? <Spinner  /> : "Sign up"  }</button>
         <p>You already have an account? <Link to="/auth/login" className="text-yellow-600 underline" >Log in</Link> </p>
       </div>
       

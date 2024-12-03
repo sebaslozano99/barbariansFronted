@@ -42,18 +42,18 @@ export default function PasswordInput({label, idName, type = "password", inputVa
 
   return (
     <div className="relative flex items-center justify-between px-2" >
-        <label htmlFor={idName}>{label}</label>
-        <input 
-          id={idName}
-          name={idName}
-          type={type}
-          value={inputValue}
-          onChange={(e) => onChangeFunc(e)}
-          placeholder={placeholder}
-          className="px-4 py-2 font-sans w-[80%] border-[1px] border-[#252525]/30"
-          required 
-        />
-      </div>
+      <label htmlFor={idName}>{label}</label>
+      <input 
+        id={idName}
+        name={idName}
+        type={type}
+        value={inputValue}
+        onChange={(e) => onChangeFunc(e)}
+        placeholder={placeholder}
+        className="px-4 py-2 font-sans w-[80%] border-[1px] border-[#252525]/30"
+        required 
+      />
+    </div>
   )
 }
 

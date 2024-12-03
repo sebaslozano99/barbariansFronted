@@ -39,7 +39,7 @@ export default function Header() {
 
 
   return (
-    <header className={`fixed top-0 z-50 flex items-center justify-between px-20 text-white w-full h-[10vh] ${isRightpage && isScrolled ? "bg-[#252525]/40" : "bg-[#252525]"} backdrop-blur-sm transition-all ease-in-out duration-500`} >
+    <header className={`sticky top-0 z-50 flex items-center justify-between px-20 text-white w-full h-[10vh] ${isRightpage && isScrolled ? "bg-[#252525]/40" : "bg-[#252525]"} backdrop-blur-sm transition-all ease-in-out duration-500`} >
       <h1 className="font-bold text-3xl" >
         <Link to="/" >Barbarians</Link>
       </h1>
