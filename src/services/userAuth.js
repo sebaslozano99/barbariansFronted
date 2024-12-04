@@ -40,8 +40,6 @@ async function signup(e, first_name, last_name, email, password, confirm_passwor
 
         const data = await res.json();
 
-        console.log(data);
-
         return data;
     }
     catch(error){
@@ -72,10 +70,7 @@ async function login(e, email, password){
             throw new Error(errorData.message);
         }
 
-
         const data = await res.json();
-
-        console.log(data);
 
         return data;
     }
@@ -83,13 +78,6 @@ async function login(e, email, password){
         throw new Error(error.message);
     }
 }
-
-
-
-
-
-
-
 
 
 async function logout(e){
@@ -116,4 +104,33 @@ async function logout(e){
 }
 
 
-export { signup, login, logout }
+async function validateToken(dispatch){
+    dispatch({type: "isValidatingToken/set", payload: true});
+    try{
+      const res = await fetch(`${BASE_URL_API}/validate-token`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if(!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message);
+      }
+
+      const data = await res.json();
+      dispatch({type: "user/dataArrived", payload: data});
+      return data;
+
+    }
+    catch(error){
+      dispatch({type: "user/loggedOut"});
+      throw new Error(error.message);
+    }
+    finally{
+      dispatch({type: "isValidatingToken/set", payload: false});
+    }
+  }
+
+
+
+export { signup, login, logout, validateToken }

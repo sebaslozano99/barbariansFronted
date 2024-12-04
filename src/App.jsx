@@ -13,7 +13,7 @@ const About = lazy(() => import("./pages/users/About"));
 const Contacts = lazy(() => import("./pages/users/Contacts"));
 
 // --- Not Foundpage
-const NotFound = lazy(() => import("./pages/NotFound"));
+const NotFound = lazy(() => import("./pages/notFound/NotFound"));
 
 // --- Authentication page container
 const Auth = lazy(() => import("./pages/authentication/Auth"));

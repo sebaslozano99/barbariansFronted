@@ -1,12 +1,17 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import PropTypes from "prop-types";
+import { validateToken } from "../services/userAuth";
 
 
 
 //if user has SIGNED UP or LOGGED IN, our backend will send through cookies a token that expires in 1h. Whenever user reloads the page, we need to revalidate the token to make sure it is still valid
-const BASE_API_URL = "http://localhost:5000";
+
+
+// const BASE_API_URL = "http://localhost:5000";
 const UserContext = createContext();
+
 
 const initialState = {
   user: null,
@@ -31,10 +36,10 @@ function reducer(state, action){
         isAuthenticated: false
       };
 
-    case "isLoading/set":
+    case "isValidatingToken/set":
       return {
         ...state,
-        isLoading: action.payload
+        isValidatingToken: action.payload
       };
 
     default: throw new Error("Unknown action type!");
@@ -57,36 +62,42 @@ export function UserProvider({children}) {
   }
 
 
-  async function validateToken(){
-    dispatch({type: "isLoading/set", payload: true});
-    try{
-      const res = await fetch(`${BASE_API_URL}/api/auth/validate-token`, {
-        method: "GET",
-        credentials: "include",
-      });
+  useQuery({
+    queryKey: ["user"],
+    queryFn: () => validateToken(dispatch),
+    retry: 1
+  });
 
-      if(!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message);
-      }
+  // async function validateToken(){
+  //   dispatch({type: "isLoading/set", payload: true});
+  //   try{
+  //     const res = await fetch(`${BASE_API_URL}/api/auth/validate-token`, {
+  //       method: "GET",
+  //       credentials: "include",
+  //     });
 
-      const data = await res.json();
-      dispatch({type: "user/dataArrived", payload: data});
+  //     if(!res.ok) {
+  //       const errorData = await res.json();
+  //       throw new Error(errorData.message);
+  //     }
 
-    }
-    catch(error){
-      console.log(`Authentication error: ${error.message}`);
-      dispatch({type: "user/loggedOut"});
-    }
-    finally{
-      dispatch({type: "isLoading/set", payload: false});
-    }
-  }
+  //     const data = await res.json();
+  //     dispatch({type: "user/dataArrived", payload: data});
+
+  //   }
+  //   catch(error){
+  //     console.log(`Authentication error: ${error.message}`);
+  //     dispatch({type: "user/loggedOut"});
+  //   }
+  //   finally{
+  //     dispatch({type: "isLoading/set", payload: false});
+  //   }
+  // }
 
 
-  useEffect(() => {
-    validateToken();
-  }, [])
+  // useEffect(() => {
+  //   validateToken();
+  // }, [])
 
 
   return (
