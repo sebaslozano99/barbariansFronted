@@ -1,8 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
-
-
-
+import { IoLogOutOutline } from "react-icons/io5";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "../services/userAuth";
+import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 
 
@@ -10,7 +12,19 @@ import { useUserContext } from "../context/UserContext";
 export default function Header() {
 
   const { user, isAuthenticated } = useUserContext();
+  const navigate = useNavigate();
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: (e) => logout(e),
+    onSuccess: (data) => {
+      navigate("/");
+      console.log("data: ", data);
+      toast.success(data.message);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    }
+  })
 
   return (
     <header className={`sticky top-0 z-50 flex items-center justify-between px-20 text-white w-full h-[10vh] bg-[#252525] backdrop-blur-sm transition-all ease-in-out duration-500`} >
@@ -69,7 +83,11 @@ export default function Header() {
                 <NavLink to="/barbershop-reviews" >Reviews</NavLink>
               </li>
 
-              <button>Log out</button>
+              <button
+                onClick={mutate}
+              >
+                { isPending ? <Spinner /> : <IoLogOutOutline size={25} />}
+              </button>
             </>
           }
         </ul>

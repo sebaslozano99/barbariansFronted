@@ -1,6 +1,6 @@
 
 
-const BASE_URL_API = "http://localhost:5000";
+const BASE_URL_API = "http://localhost:5000/api/auth";
 
 const regEx = /[\d\W_]/g;
 
@@ -23,7 +23,7 @@ async function signup(e, first_name, last_name, email, password, confirm_passwor
     };
 
     try {
-        const res = await fetch(`${BASE_URL_API}/api/auth/signup`, {
+        const res = await fetch(`${BASE_URL_API}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,4 +51,69 @@ async function signup(e, first_name, last_name, email, password, confirm_passwor
 
 
 
-export { signup }
+
+async function login(e, email, password){
+    e.preventDefault();
+
+    const user = {email, password};
+
+    try {
+        const res = await fetch(`${BASE_URL_API}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+            credentials: "include"
+        });
+
+        if(!res.ok){
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+
+        const data = await res.json();
+
+        console.log(data);
+
+        return data;
+    }
+    catch(error){
+        throw new Error(error.message);
+    }
+}
+
+
+
+
+
+
+
+
+
+async function logout(e){
+    e.preventDefault();
+
+    try {
+        const res = await fetch(`${BASE_URL_API}/logout`, {
+            method: "POST",
+            credentials: "include"
+        });
+    
+        if(!res.ok){
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+    
+        const data = await res.json();
+    
+        return data;
+    }
+    catch(error){
+        throw new Error(error.message)
+    }
+}
+
+
+export { signup, login, logout }
