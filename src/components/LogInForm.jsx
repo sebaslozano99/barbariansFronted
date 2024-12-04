@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "../services/userAuth";
-import PasswordInput from "./PasswordInput";
-import toast from "react-hot-toast";
-import Spinner from "../components/Spinner";
 import { useUserContext } from "../context/UserContext";
+import PasswordInput from "./PasswordInput";
+import Spinner from "../components/Spinner";
+import useLogin from "../hooks/useLogin";
+
 
 
 
@@ -16,24 +15,11 @@ export default function LogInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { mutate, isPending } = useLogin(navigate, handleLoginSignup);
 
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: (e) => login(e, email, password),
-    onSuccess: (data) => {
-      console.log(data);
-      if(data.user.role === "barbershop") navigate("/barbershop-dashboard");
-      else navigate("/");
-
-      handleLoginSignup(data.user);
-      toast.success(data.message);
-
-    },
-    onError: (error) => toast.error(error.message),
-  })
 
   return (
-    <form className="flex flex-col gap-4 w-[40em]" onSubmit={mutate} >
+    <form className="flex flex-col gap-4 w-[40em]" onSubmit={(e) => mutate({e, email, password})} >
       <h2 className="p-2 text-white text-xl w-full bg-[#252525]" >Log in to your account</h2>
 
       <PasswordInput

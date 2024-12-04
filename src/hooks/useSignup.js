@@ -1,15 +1,26 @@
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "../services/userAuth";
+import toast from "react-hot-toast";
 
-function useMutate(objectUser){
+function useSignup(navigate, handleLoginSignup, role){
 
-    return useMutation({
-        mutationFn: (e) => signup(e, ...objectUser),
-        onSuccess: () => {
-            
-        }
-    })
+    const { mutate, isPending, isError, error } = useMutation({
+        mutationFn: ({e, first_name, last_name, email, password, confirm_password}) => 
+        signup(e, first_name, last_name, email, password, confirm_password, role),
+
+        onSuccess: (data) => {
+          handleLoginSignup(data.user);
+          if(role === "user") navigate("/barbers");
+          else navigate("/barbershop-profile/edit");
+          toast.success(data.message);
+        },
+
+        onError: (error) => toast.error(error.message),
+    });
+
+
+    return { mutate, isPending, isError, error }
 }
 
 
-export default useMutate
+export default useSignup
