@@ -12,7 +12,7 @@ import { useUserContext } from "../context/UserContext";
 
 export default function LogInForm() {
 
-  const { setUser, setIsAuthenticated } = useUserContext();
+  const { handleLoginSignup } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -25,8 +25,7 @@ export default function LogInForm() {
       if(data.user.role === "barbershop") navigate("/barbershop-dashboard");
       else navigate("/");
 
-      setUser(data.user);
-      setIsAuthenticated(true);
+      handleLoginSignup(data.user);
       toast.success(data.message);
 
     },

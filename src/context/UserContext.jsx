@@ -1,30 +1,64 @@
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { useContext } from "react";
-import { useState } from "react";
 import PropTypes from "prop-types";
 
 
 
 //if user has SIGNED UP or LOGGED IN, our backend will send through cookies a token that expires in 1h. Whenever user reloads the page, we need to revalidate the token to make sure it is still valid
-
-
-
 const BASE_API_URL = "http://localhost:5000";
 const UserContext = createContext();
 
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+  isValidatingToken: true,
+};
+
+
+function reducer(state, action){
+  switch(action.type){
+    case "user/dataArrived":
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+      };
+
+    case "user/loggedOut":
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false
+      };
+
+    case "isLoading/set":
+      return {
+        ...state,
+        isLoading: action.payload
+      };
+
+    default: throw new Error("Unknown action type!");
+  }
+}
+
+
+
+
 export function UserProvider({children}) {
 
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [{user, isAuthenticated, isValidatingToken}, dispatch] = useReducer(reducer, initialState);
 
+  function handleLoginSignup(data){
+    dispatch({type: "user/dataArrived", payload: data});
+  }
 
-  useEffect(() => {
-    console.log("user: ", user);
-  }, [user])
+  function handleLogout(){
+    dispatch({type: "user/loggedOut"});
+  }
+
 
   async function validateToken(){
-    setIsLoading(true);
+    dispatch({type: "isLoading/set", payload: true});
     try{
       const res = await fetch(`${BASE_API_URL}/api/auth/validate-token`, {
         method: "GET",
@@ -37,19 +71,15 @@ export function UserProvider({children}) {
       }
 
       const data = await res.json();
-
-      setUser(data);
-      setIsAuthenticated(true);
+      dispatch({type: "user/dataArrived", payload: data});
 
     }
     catch(error){
       console.log(`Authentication error: ${error.message}`);
-      setUser(null);
-      setIsAuthenticated(false);
-      throw new Error(error.message);
+      dispatch({type: "user/loggedOut"});
     }
     finally{
-      setIsLoading(false);
+      dispatch({type: "isLoading/set", payload: false});
     }
   }
 
@@ -63,9 +93,9 @@ export function UserProvider({children}) {
     <UserContext.Provider value={{
       user,
       isAuthenticated,
-      isLoading,
-      setUser,
-      setIsAuthenticated
+      isValidatingToken,
+      handleLoginSignup,
+      handleLogout
     }}>
       { children }
     </UserContext.Provider>

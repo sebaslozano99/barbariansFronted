@@ -2,10 +2,10 @@ import { useReducer } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { signup } from '../services/userAuth';
+import { useUserContext } from '../context/UserContext';
 import PasswordInput from './PasswordInput';
 import toast from 'react-hot-toast';
 import Spinner from './Spinner';
-import { useUserContext } from '../context/UserContext';
 
 
 const initialState = {
@@ -65,16 +65,14 @@ function reducer(state, action){
 
 export default function SignupForm() {
 
-  const { setUser, setIsAuthenticated } = useUserContext();
+  const { handleLoginSignup } = useUserContext();
   const [{first_name, last_name, email, password, confirm_password, role}, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
-
 
   const { mutate, isPending } = useMutation({
     mutationFn: (e) => signup(e, first_name, last_name, email, password, confirm_password, role),
     onSuccess: (data) => {
-      setUser(data.user);
-      setIsAuthenticated(true);
+      handleLoginSignup(data.user);
       if(role === "user") navigate("/barbers");
       else navigate("/barbershop-profile/edit");
       toast.success(data.message);
@@ -86,7 +84,7 @@ export default function SignupForm() {
   return (
     <form 
       onSubmit={mutate}
-      className="flex flex-col gap-4 mt-20 w-[40em]" 
+      className="flex flex-col gap-4 w-[40em]" 
     >
       <h2 className="p-2 text-white text-xl w-full bg-[#252525]" >Create account</h2>
 

@@ -11,16 +11,15 @@ import Spinner from "../components/Spinner";
 
 export default function Header() {
 
-  const { user, isAuthenticated, setUser, setIsAuthenticated } = useUserContext();
+  const { user, isAuthenticated, handleLogout } = useUserContext();
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (e) => logout(e),
     onSuccess: (data) => {
       navigate("/");
-      setUser(null);
-      setIsAuthenticated(false);
       toast.success(data.message);
+      handleLogout();
     },
     onError: (error) => {
       toast.error(error.message);
