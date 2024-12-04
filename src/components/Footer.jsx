@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="grid grid-cols-4 gap-4 p-8 mt-24 w-full h-72 bg-[#252525]" >
+    <footer className="grid grid-cols-4 gap-4 p-8 w-full h-72 bg-[#252525]" >
 
       <div className="flex justify-center items-center" >
         <h2 className="text-6xl font-semibold text-yellow-500" >BARBARIANS.COM</h2>

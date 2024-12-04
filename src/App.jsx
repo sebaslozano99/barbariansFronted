@@ -2,8 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import { UserProvider } from "./context/userContext";
-
+import { UserProvider } from "./context/UserContext";
 
 
 // Pages
@@ -13,6 +12,10 @@ const Homepage = lazy(() => import("./pages/Homepage"));
 const About = lazy(() => import("./pages/About"));
 const Contacts = lazy(() => import("./pages/Contacts"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+import Admin from "./pages/barbershop/BarbershopContainer";
+import EditBarbershop from "./pages/barbershop/EditBarbershop";
+import BarberDashboard from "./pages/barbershop/BarberDashboard";
+import BarberProfile from "./pages/barbershop/BarberProfile";
 
 
 // Components
@@ -20,8 +23,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LogInForm from "./components/LogInForm";
 import SignupForm from "./components/SignupForm";
-import Admin from "./pages/Admin";
-import EditBarbershop from "./pages/EditBarbershop";
+import BarberAppointments from "./pages/barbershop/BarberAppointments";
+import BarberReviews from "./pages/barbershop/BarberReviews";
+
 
 
 const queryClient = new QueryClient();
@@ -32,6 +36,7 @@ export default function App() {
       <UserProvider>
         <BrowserRouter>
           <Suspense fallback={ <h1>Loading...</h1> } >
+
             <Header />
             <Routes>
               <Route path="/" element={ <Homepage />  } />
@@ -41,8 +46,11 @@ export default function App() {
               <Route path="*" element={ <NotFound /> } />
 
               <Route element={ <Admin /> }>
-                <Route path="/barbershop-dashboard" element={ <h1>Admin</h1> } />
-                <Route path="/barbershop-edit" element={ <EditBarbershop /> } />
+                <Route path="/barbershop-dashboard" element={ <BarberDashboard /> } />
+                <Route path="/barbershop-profile" element={ <BarberProfile /> } />
+                <Route path="/barbershop-profile/edit" element={ <EditBarbershop /> } />
+                <Route path="/barbershop-appointments" element={ <BarberAppointments /> } />
+                <Route path="/barbershop-reviews" element={ <BarberReviews /> } />
               </Route>
 
               <Route path="/auth" element={ <Auth /> }>
@@ -53,6 +61,7 @@ export default function App() {
 
             </Routes>
             <Footer />
+            
           </Suspense>
         </BrowserRouter>
       </UserProvider>

@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 
 
 
+//if user has SIGNED UP or LOGGED IN, our backend will send through cookies a token that expires in 1h. Whenever user reloads the page, we need to revalidate the token to make sure it is still valid
+
 
 
 const BASE_API_URL = "http://localhost:5000";
@@ -15,6 +17,11 @@ export function UserProvider({children}) {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+
+  useEffect(() => {
+    console.log("user: ", user);
+  }, [user])
 
   async function validateToken(){
     setIsLoading(true);
@@ -32,14 +39,20 @@ export function UserProvider({children}) {
       const data = await res.json();
 
       setUser(data);
+      setIsAuthenticated(true);
+
     }
     catch(error){
+      console.log(`Authentication error: ${error.message}`);
+      setUser(null);
+      setIsAuthenticated(false);
       throw new Error(error.message);
     }
     finally{
       setIsLoading(false);
     }
   }
+
 
   useEffect(() => {
     validateToken();

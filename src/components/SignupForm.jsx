@@ -72,7 +72,7 @@ export default function SignupForm() {
     mutationFn: (e) => signup(e, first_name, last_name, email, password, confirm_password, role),
     onSuccess: (data) => {
       if(role === "user") navigate("/barbers");
-      else navigate("/barbershop-edit");
+      else navigate("/barbershop-profile/edit");
       toast.success(data.message);
     },
     onError: (error) => toast.error(error.message),
