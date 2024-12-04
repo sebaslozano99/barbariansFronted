@@ -7,15 +7,22 @@ import { UserProvider } from "./context/UserContext";
 
 // Pages
 
-const Auth = lazy(() => import("./pages/Auth"));
-const Homepage = lazy(() => import("./pages/Homepage"));
-const About = lazy(() => import("./pages/About"));
-const Contacts = lazy(() => import("./pages/Contacts"));
+// --- All user pages 
+const Homepage = lazy(() => import("./pages/users/Homepage"));
+const About = lazy(() => import("./pages/users/About"));
+const Contacts = lazy(() => import("./pages/users/Contacts"));
+
+// --- Not Foundpage
 const NotFound = lazy(() => import("./pages/NotFound"));
-import Admin from "./pages/barbershop/BarbershopContainer";
-import EditBarbershop from "./pages/barbershop/EditBarbershop";
-import BarberDashboard from "./pages/barbershop/BarberDashboard";
-import BarberProfile from "./pages/barbershop/BarberProfile";
+
+// --- Authentication page container
+const Auth = lazy(() => import("./pages/authentication/Auth"));
+
+// --- Barbershop pages
+const BarbershopContainer = lazy(() => import("./pages/barbershop/BarbershopContainer"));
+const EditBarbershop = lazy(() => import("./pages/barbershop/EditBarbershop"));
+const BarberDashboard = lazy(() => import("./pages/barbershop/BarberDashboard"));
+const BarberProfile = lazy(() => import("./pages/barbershop/BarberProfile"));
 
 
 // Components
@@ -39,13 +46,13 @@ export default function App() {
 
             <Header />
             <Routes>
+
               <Route path="/" element={ <Homepage />  } />
               <Route path="/barbers" element={ <h1>Barbers</h1> } />
               <Route path="/about" element={ <About /> } />
               <Route path="/contact" element={ <Contacts /> } />
-              <Route path="*" element={ <NotFound /> } />
 
-              <Route element={ <Admin /> }>
+              <Route element={ <BarbershopContainer /> }>
                 <Route path="/barbershop-dashboard" element={ <BarberDashboard /> } />
                 <Route path="/barbershop-profile" element={ <BarberProfile /> } />
                 <Route path="/barbershop-profile/edit" element={ <EditBarbershop /> } />
@@ -59,13 +66,14 @@ export default function App() {
                 <Route path="/auth/signup" element={ <SignupForm /> } />
               </Route>
 
+              <Route path="*" element={ <NotFound /> } />
             </Routes>
             <Footer />
             
           </Suspense>
         </BrowserRouter>
       </UserProvider>
-      <Toaster position="top-right" toastOptions={{ className: "bg-[#252525] text-white", duration: 2000}} />
+      <Toaster position="top-right" toastOptions={{ className: "bg-[#252525] text-white", duration: 1000}} />
     </QueryClientProvider>
   )
 }

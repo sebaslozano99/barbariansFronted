@@ -5,22 +5,30 @@ import { login } from "../services/userAuth";
 import PasswordInput from "./PasswordInput";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
+import { useUserContext } from "../context/UserContext";
 
 
 
 
 export default function LogInForm() {
 
+  const { setUser, setIsAuthenticated } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
 
   const { mutate, isPending } = useMutation({
     mutationFn: (e) => login(e, email, password),
     onSuccess: (data) => {
       console.log(data);
+      if(data.user.role === "barbershop") navigate("/barbershop-dashboard");
+      else navigate("/");
+
+      setUser(data.user);
+      setIsAuthenticated(true);
       toast.success(data.message);
-      navigate("/");
+
     },
     onError: (error) => toast.error(error.message),
   })

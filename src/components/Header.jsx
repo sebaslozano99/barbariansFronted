@@ -11,14 +11,15 @@ import Spinner from "../components/Spinner";
 
 export default function Header() {
 
-  const { user, isAuthenticated } = useUserContext();
+  const { user, isAuthenticated, setUser, setIsAuthenticated } = useUserContext();
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (e) => logout(e),
     onSuccess: (data) => {
       navigate("/");
-      console.log("data: ", data);
+      setUser(null);
+      setIsAuthenticated(false);
       toast.success(data.message);
     },
     onError: (error) => {
@@ -59,7 +60,11 @@ export default function Header() {
                   <NavLink to="/auth/login" className="text-yellow-500" >Log in</NavLink>
                 </li>
                 :
-                <button>Log out</button>
+                <button
+                onClick={mutate}
+              >
+                { isPending ? <Spinner /> : <IoLogOutOutline size={25} />}
+              </button>
               
               }
             </>

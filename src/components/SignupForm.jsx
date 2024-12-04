@@ -5,6 +5,7 @@ import { signup } from '../services/userAuth';
 import PasswordInput from './PasswordInput';
 import toast from 'react-hot-toast';
 import Spinner from './Spinner';
+import { useUserContext } from '../context/UserContext';
 
 
 const initialState = {
@@ -64,6 +65,7 @@ function reducer(state, action){
 
 export default function SignupForm() {
 
+  const { setUser, setIsAuthenticated } = useUserContext();
   const [{first_name, last_name, email, password, confirm_password, role}, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
 
@@ -71,6 +73,8 @@ export default function SignupForm() {
   const { mutate, isPending } = useMutation({
     mutationFn: (e) => signup(e, first_name, last_name, email, password, confirm_password, role),
     onSuccess: (data) => {
+      setUser(data.user);
+      setIsAuthenticated(true);
       if(role === "user") navigate("/barbers");
       else navigate("/barbershop-profile/edit");
       toast.success(data.message);
