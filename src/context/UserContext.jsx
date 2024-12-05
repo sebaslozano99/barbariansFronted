@@ -1,8 +1,8 @@
 import { createContext, useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import PropTypes from "prop-types";
 import { validateToken } from "../services/userAuth";
+import PropTypes from "prop-types";
 
 
 
@@ -60,7 +60,6 @@ export function UserProvider({children}) {
   function handleLogout(){
     dispatch({type: "user/loggedOut"});
   }
-
 
   useQuery({
     queryKey: ["user"],

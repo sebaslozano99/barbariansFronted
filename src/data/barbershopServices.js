@@ -22,7 +22,7 @@ export const services = [
     },
     {
       service: "Caesar Cut",
-      idNameFor: "fade-haircut"
+      idNameFor: "caesar-cut"
     },
     {
       service: "Undercut",
@@ -53,8 +53,8 @@ export const services = [
       idNameFor: "nose-and-ear-treatment"
     },
     {
-      service: "beard Shaping",
-      idNameFor: "beard-shaping"
-    }
+      service: "Mobile Service",
+      idNameFor: "mobile-service"
+    },
 ];
   

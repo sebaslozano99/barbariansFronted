@@ -73,7 +73,7 @@ export default function App() {
           </Suspense>
         </BrowserRouter>
       </UserProvider>
-      <Toaster position="top-right" toastOptions={{ className: "bg-[#252525] text-white", duration: 1000}} />
+      <Toaster position="top-right" toastOptions={{ className: "bg-[#252525] text-white", duration: 1000 }} />
     </QueryClientProvider>
   )
 }
