@@ -1,10 +1,40 @@
 const BASE_URL_API ="http://localhost:5000/api/barbershop";
 
 
+
+
+// GET request
+
+async function fetchBarbershopsProfile(user_id){
+    try{
+        const res = await fetch(`${BASE_URL_API}/profile/${user_id}`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        if(!res.ok){
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        const data = await res.json();
+
+        return data;
+
+    }
+    catch(error){
+        console.log("Profile error: ", error.message);
+        throw new Error(error.message);
+    }
+}
+
+
+
+
+
+// POST/PUT request
 async function setupBarbershop(e, user_id, name, description, address, phone, openTime, closeTime, images, services){
     e.preventDefault();
-
-    console.log(services);
 
     // validations -----
     if(phone.length !== 10) throw new Error("Phone number must be 10 digits");
@@ -57,4 +87,4 @@ async function setupBarbershop(e, user_id, name, description, address, phone, op
 
 
 
-export { setupBarbershop }
+export { fetchBarbershopsProfile, setupBarbershop }

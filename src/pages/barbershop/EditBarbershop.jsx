@@ -71,11 +71,9 @@ export default function EditBarbershop() {
   const { user } = useUserContext();
   const [images, setImages] = useState(null);
   const [services, setServices] = useState([]);
-  const [{barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime }, dispatch] = useReducer(reducer, initialStates);
-
+  const [{ barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime }, dispatch] = useReducer(reducer, initialStates);
 
   const { mutate, isPending } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services);
-
 
 
   function handleCheckbox(e){
