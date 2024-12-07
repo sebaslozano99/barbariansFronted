@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchBarbershopsProfile } from "../../services/barbershops";
 import { useUserContext } from "../../context/UserContext";
 import { IoHomeSharp } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
 
 
 
@@ -11,12 +10,8 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 export default function BarberProfile() {
 
   const { user } = useUserContext();
+  const { data, isPending } = useFetchBarberProfile(user);
 
-  const { data, isPending } = useQuery({
-    queryKey: ["barbershop-info"],
-    queryFn: () => fetchBarbershopsProfile(user?.id),
-    retry: 1
-  });
 
   if(isPending) return <h1>Loading...!</h1>
 
@@ -24,7 +19,7 @@ export default function BarberProfile() {
   return (
     <main className="flex gap-20 p-10 w-full h-screen bg-gray-50">
 
-      <div className="flex items-center justify-center w-[60%] h-[32em] overflow-hidden rounded-lg" >
+      <div className="flex items-center justify-center w-[60%] h-[85%] overflow-hidden rounded-lg" >
         <img 
           src={`http://localhost:5000/${data.images[1].image_path}`} 
           alt={data.images[0].image_path} 
@@ -32,7 +27,7 @@ export default function BarberProfile() {
         />
       </div>
 
-      <div className="flex flex-col gap-8 w-[40%] h-full overflow-y-auto" >
+      <div className="flex flex-col gap-8 p-1 w-[40%] h-[85%] overflow-y-auto profile" >
         <div>
           <h2 className="text-7xl font-bold " >{data.business_name}</h2>
           <p className="text-2xl" >{data.description}</p>
@@ -45,7 +40,7 @@ export default function BarberProfile() {
         </div>
 
         <div>
-          <h3 className="text-4xl font-bold mb-3" >Hours: </h3>
+          <h3 className="text-4xl font-bold mb-3" >Work Hours: </h3>
           <p className="text-lg" >Open time: {data.open_time} AM</p>
           <p className="text-lg" >Close time: {data.close_time} PM</p>
         </div>

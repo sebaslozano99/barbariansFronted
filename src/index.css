@@ -8,3 +8,18 @@
 .active {
     text-decoration: underline;
 }
+
+.profile::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+}
+
+
+.profile::-webkit-scrollbar-track {
+    background: #e7e6e6; /* Background of the scrollbar track */
+    border-radius: 10px;
+  }
+
+.profile::-webkit-scrollbar-thumb {
+    background-color: rgba(37, 37, 37); /* Color of the draggable part */
+    border-radius: 10px;
+  }

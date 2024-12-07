@@ -64,39 +64,9 @@ export function UserProvider({children}) {
   useQuery({
     queryKey: ["user"],
     queryFn: () => validateToken(dispatch),
-    retry: 1
+    retry: 1,
   });
 
-  // async function validateToken(){
-  //   dispatch({type: "isLoading/set", payload: true});
-  //   try{
-  //     const res = await fetch(`${BASE_API_URL}/api/auth/validate-token`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //     });
-
-  //     if(!res.ok) {
-  //       const errorData = await res.json();
-  //       throw new Error(errorData.message);
-  //     }
-
-  //     const data = await res.json();
-  //     dispatch({type: "user/dataArrived", payload: data});
-
-  //   }
-  //   catch(error){
-  //     console.log(`Authentication error: ${error.message}`);
-  //     dispatch({type: "user/loggedOut"});
-  //   }
-  //   finally{
-  //     dispatch({type: "isLoading/set", payload: false});
-  //   }
-  // }
-
-
-  // useEffect(() => {
-  //   validateToken();
-  // }, [])
 
 
   return (

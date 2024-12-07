@@ -1,0 +1,62 @@
+.mainContainer {
+    width: 500px;
+    height: 280px;
+    margin: 0 auto;
+}
+
+.mainContainer ul, li {
+    list-style: none;
+    white-space: nowrap;
+}
+
+
+.mainContainer li {
+    display: inline;
+}
+
+
+.mainContainer img {
+    margin-top: -16px;
+}
+
+
+.sliderContainer {
+    position: relative;
+    height: 100%
+}
+
+
+.imagesContainer {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+
+
+.leftArrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 1;
+    cursor: pointer;
+}
+
+
+.rightArrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 1;
+    cursor: pointer;
+}
