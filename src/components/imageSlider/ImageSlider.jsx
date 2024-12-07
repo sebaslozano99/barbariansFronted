@@ -1,24 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./imageSlider.module.css";
 
 
-export default function ImageSlider({images}) {
-    
-    const listRef = useRef();
+
+export default function ImageSlider({
+    images
+}) {
+
     const [currIndex, setCurrIndex] = useState(0);
-
-    useEffect(() => {
-        const listNode = listRef.current; // gets UL dom element with all its node children
-        const imgNode = listNode.querySelectorAll("li > img")[currIndex]; // returns an array of the images nodes and with [currIndex] we select the item depending on the currIndex
-
-        if(imgNode){
-            imgNode.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-
-    }, [currIndex])
 
 
     function handleIncrement(){
@@ -32,23 +22,21 @@ export default function ImageSlider({images}) {
 
 
   return (
-    <div className={styles.mainContainer} >
-        <div className={styles.sliderContainer} > 
+    <div className={styles.mainContainer}>
 
-            <div className={styles.leftArrow} onClick={handleDecrement} >&#10092;</div>
+        <div className={styles.leftArrow} onClick={handleDecrement} >&#10092;</div>
+        <div className={styles.rightArrow} onClick={handleIncrement} >&#10093;</div>
 
-            <div className={styles.rightArrow} onClick={handleIncrement} >&#10093;</div>
-
-            <div className={styles.imagesContainer} >
-                <ul ref={listRef} >
-                    {
-                        images.map((item) => <li key={item.id}>
-                            <img src={item.image} alt={item.image} width={700} height={480} />
-                        </li>)
-                    }
-                </ul>
-            </div>
+        <div className={styles.imagesContainer} >
+            <img 
+                // key={currIndex}
+                loading="lazy"
+                src={`http://localhost:5000/${images[currIndex].image_path}`} 
+                alt={images[currIndex].image_id} 
+                className={styles.image}
+            />
         </div>
+
     </div>
   )
 }
@@ -56,5 +44,5 @@ export default function ImageSlider({images}) {
 
 
 ImageSlider.propTypes = {
-    images: PropTypes.array
+    images: PropTypes.array,
 }

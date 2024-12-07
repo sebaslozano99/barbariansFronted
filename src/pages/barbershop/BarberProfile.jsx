@@ -3,6 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import { IoHomeSharp } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
+import ImageSlider from "../../components/imageSlider/ImageSlider";
 
 
 
@@ -19,13 +20,7 @@ export default function BarberProfile() {
   return (
     <main className="flex gap-20 p-10 w-full h-screen bg-gray-50">
 
-      <div className="flex items-center justify-center w-[60%] h-[85%] overflow-hidden rounded-lg" >
-        <img 
-          src={`http://localhost:5000/${data.images[1].image_path}`} 
-          alt={data.images[0].image_path} 
-          className=" h-full w-full bg-cover rounded-lg"
-        />
-      </div>
+      <ImageSlider images={data.images} />
 
       <div className="flex flex-col gap-8 p-1 w-[40%] h-[85%] overflow-y-auto profile" >
         <div>
