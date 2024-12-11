@@ -10,7 +10,14 @@ export default function CheckboxContainer({handleCheckbox}) {
 
       <div className="flex items-center flex-wrap gap-3 w-[90%]" >
         {
-          services.map((service) => <CheckboxItem key={service.service} value={service.service} idNameFor={service.idNameFor} handleCheckbox={handleCheckbox}  />)
+          services.map((service) => 
+          <CheckboxItem 
+            key={service.service} 
+            value={service.service} 
+            idNameFor={service.idNameFor} 
+            handleCheckbox={handleCheckbox}  
+          />
+        )
         }
       </div>
 
@@ -20,5 +27,5 @@ export default function CheckboxContainer({handleCheckbox}) {
 
 
 CheckboxContainer.propTypes = {
-  handleCheckbox: PropTypes.func
+  handleCheckbox: PropTypes.func,
 }

@@ -31,7 +31,7 @@ export default function ImageSlider({
             <img 
                 key={currIndex}
                 loading="lazy"
-                src={`http://localhost:5000/${images[currIndex].image_path}`} 
+                src={`http://localhost:5000/${images?.at(currIndex)?.image_path}`} 
                 alt={images[currIndex].image_id} 
                 className={styles.image}
             />

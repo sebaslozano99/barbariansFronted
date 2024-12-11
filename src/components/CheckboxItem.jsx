@@ -15,8 +15,8 @@ export default function CheckboxItem({idNameFor, value, handleCheckbox}) {
       <input 
         id={idNameFor}
         name={idNameFor}
-        type="checkbox"
         value={value}
+        type="checkbox"
         className="cursor-pointer"
         onChange={(e) => handleCheckbox(e)}
       />

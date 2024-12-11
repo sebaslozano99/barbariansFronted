@@ -20,9 +20,12 @@ const Auth = lazy(() => import("./pages/authentication/Auth"));
 
 // --- Barbershop pages
 const BarbershopContainer = lazy(() => import("./pages/barbershop/BarbershopContainer"));
-const EditBarbershop = lazy(() => import("./pages/barbershop/EditBarbershop"));
+const SetupBarbershop = lazy(() => import("./pages/barbershop/SetupBarbershop"));
 const BarberDashboard = lazy(() => import("./pages/barbershop/BarberDashboard"));
 const BarberProfile = lazy(() => import("./pages/barbershop/BarberProfile"));
+const BarberAppointments = lazy(() => import("./pages/barbershop/BarberAppointments"));
+const BarberReviews = lazy(() => import("./pages/barbershop/BarberReviews"));
+const EditBarbershop = lazy(() => import("./pages/barbershop/EditBarbershop"));
 
 
 // Components
@@ -30,8 +33,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LogInForm from "./components/LogInForm";
 import SignupForm from "./components/SignupForm";
-import BarberAppointments from "./pages/barbershop/BarberAppointments";
-import BarberReviews from "./pages/barbershop/BarberReviews";
+
 
 
 
@@ -61,6 +63,7 @@ export default function App() {
               <Route element={ <BarbershopContainer /> }>
                 <Route path="/barbershop-dashboard" element={ <BarberDashboard /> } />
                 <Route path="/barbershop-profile" element={ <BarberProfile /> } />
+                <Route path="/barbershop-profile/setup" element={ <SetupBarbershop /> } />
                 <Route path="/barbershop-profile/edit" element={ <EditBarbershop /> } />
                 <Route path="/barbershop-appointments" element={ <BarberAppointments /> } />
                 <Route path="/barbershop-reviews" element={ <BarberReviews /> } />

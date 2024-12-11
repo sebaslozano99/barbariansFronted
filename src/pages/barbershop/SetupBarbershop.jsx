@@ -1,10 +1,9 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { useUserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput";
 import CheckboxContainer from "../../components/CheckboxContainer";
-import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
-import useEditBarbershop from "../../hooks/useEditBarbershop";
+import useSetupBarbershop from "../../hooks/useSetupBarbershop";
 
 
 const initialStates = {
@@ -75,17 +74,6 @@ function reducer(state, action){
         ...state,
         barbershopServices: state.barbershopServices.filter((service) => service.service !== action.payload)
       };
-    
-    case "setAll":
-      return {
-        ...state,
-        barbershopName: action.payload.business_name,
-        barbershopDescription: action.payload.description,
-        barbershopAddress: action.payload.address,
-        barbershopPhone: action.payload.phone,
-        barbershopOpenTime: action.payload.open_time,
-        barbershopCloseTime: action.payload.close_time,
-      }
 
     default: throw new Error("Unknown action type!");
   }
@@ -93,14 +81,10 @@ function reducer(state, action){
 
 
 
-export default function EditBarbershop() {
+export default function SetupBarbershop() {
 
   const { user } = useUserContext();
-
   const navigate = useNavigate();
-
-  const { data, isPending, isSuccess } = useFetchBarberProfile(user?.id);
-
 
   const [{ 
     barbershopName, 
@@ -113,7 +97,7 @@ export default function EditBarbershop() {
     barbershopServices 
   }, dispatch] = useReducer(reducer, initialStates);
 
-  const { mutate, isPending: isSaving } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, barbershopImages, barbershopServices, navigate);
+  const { mutate, isPending: isSaving } = useSetupBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, barbershopImages, barbershopServices, navigate);
 
 
   function handleCheckbox(e){
@@ -123,28 +107,15 @@ export default function EditBarbershop() {
   }
 
 
-  useEffect(() => {
-    if(isSuccess) dispatch({type: "setAll", payload: data})
-  }, [isSuccess, data]);
-
-
-
-
-
-  if(isPending) return <main className="flex flex-col justify-center items-center gap-8 py-8 w-full h-auto bg-red--500 text-white">
-    Loading...
-  </main>
-
-
 
   return (
     <main className="flex flex-col justify-center items-center gap-8 py-8 w-full h-auto">
 
-      <h2 className="text-4xl" >Edit Barbershop&apos;s Information</h2>
+      <h2 className="text-4xl" >Barbershop set up</h2>
 
       <form className="flex flex-col gap-8 w-[50em]" onSubmit={mutate} >
 
-        <p className="p-2 text-white text-xl w-full bg-[#252525]" >Make the changes and submit</p>
+        <p className="p-2 text-white text-xl w-full bg-[#252525]" >Fill up all the information below</p>
 
         <PasswordInput
           type="text"
@@ -224,7 +195,7 @@ export default function EditBarbershop() {
             accept="image/jpg, image/jpeg"
             className="px-4 py-2 w-auto cursor-pointer"
             onChange={(e) => dispatch({type: "barbershopImages/set", payload: e.target.files})}
-            required={false}
+            required={true}
           />
         </div>
 
@@ -232,7 +203,7 @@ export default function EditBarbershop() {
 
         <div className="flex justify-end" >  
           <button className="py-2 text-white w-20 bg-[#252525]" >
-            { isSaving  ? "Editing..." : "Edit" }
+            { isSaving  ? "Saving..." : "Save" }
           </button>
         </div>
 

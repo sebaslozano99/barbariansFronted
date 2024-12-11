@@ -11,7 +11,7 @@ function useSignup(navigate, handleLoginSignup, role){
         onSuccess: (data) => {
           handleLoginSignup(data.user);
           if(role === "user") navigate("/barbers");
-          else navigate("/barbershop-profile/edit");
+          else navigate("/barbershop-profile/setup");
           toast.success(data.message);
         },
 

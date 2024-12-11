@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editBarbershopInfo } from "../services/barbershops";
+import { setupBarbershop } from "../services/barbershops";
 import toast from "react-hot-toast";
 
 
 
 
-export default function useEditBarbershop(user_id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services, navigate){
+export default function useSetupBarbershop(user_id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services, navigate){
   
-  const queryClient = useQueryClient(); 
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
 
-      mutationFn: (e) => editBarbershopInfo(e, user_id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services),
+      mutationFn: (e) => setupBarbershop(e, user_id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services),
 
       onSuccess: (data) => {
         queryClient.invalidateQueries({queryKey: ["barbershop-info"]});

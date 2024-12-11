@@ -6,7 +6,7 @@ export default function Auth() {
 
   const { isAuthenticated, isLoading } = useUserContext();
 
-  if(isLoading) return <h1>Loading...</h1>
+  if(isLoading) return <h1 className="text-9xl text-green-800" >Loading...</h1>
 
   if(isAuthenticated) return <InvalidAuthAccess />
 

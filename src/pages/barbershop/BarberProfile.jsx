@@ -11,16 +11,24 @@ import ImageSlider from "../../components/imageSlider/ImageSlider";
 export default function BarberProfile() {
 
   const { user } = useUserContext();
-  const { data, isPending } = useFetchBarberProfile(user);
+  const { data, isPending } = useFetchBarberProfile(user?.id);
+
 
 
   if(isPending) return <h1>Loading...!</h1>
+
+  // if user hasn't set up barbershop, the API will return an object with a message property, otherwise a big object with all the info
+  if(data.message) return <main className="flex flex-col justify-center items-center p-10 w-full h-screen bg-gray-50">
+    <h2 className="text-7xl" >Set up your profile</h2>
+    <Link to="/barbershop-profile/edit" className="px-4 py-1.5 text-center w-40 bg-yellow-500" >Set up barbershop</Link>
+  </main>
+
 
 
   return (
     <main className="flex gap-20 p-10 w-full h-screen bg-gray-50">
 
-      <ImageSlider images={data.images} />
+      <ImageSlider images={data?.images} />
 
       <div className="flex flex-col gap-8 p-1 w-[40%] h-[85%] overflow-y-auto profile" >
         <div>
@@ -43,7 +51,7 @@ export default function BarberProfile() {
         <div>
           <h3 className="text-4xl font-bold mb-3" >Services & Prices:  </h3>
           {
-            data.services.map((service) => <p className="text-lg" key={service.service} >{service.service} - ${service.price}</p>)
+            data.services?.map((service) => <p className="text-lg" key={service.service} >{service.service} - ${service.price}</p>)
           }
         </div>
 

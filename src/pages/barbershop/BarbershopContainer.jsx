@@ -5,7 +5,7 @@ export default function BarbershopContainer() {
  
   const { user, isAuthenticated, isValidatingToken } = useUserContext();
 
-  if(isValidatingToken) return <h1>Loading...!</h1>
+  if(isValidatingToken) return <h1 className="text-7xl text-red-500" >Loading...!</h1>
 
   if(user?.role === "user" || !isAuthenticated) return <Navigate to="/" replace />
 
