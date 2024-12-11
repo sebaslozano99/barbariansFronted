@@ -62,7 +62,7 @@ async function setupBarbershop(e, user_id, name, description, address, phone, op
 
     try{
         const res = await fetch(`${BASE_URL_API}/setup`, {
-            method: "POST",
+            method: "PUT",
             credentials: "include",
             body: userData,
         });

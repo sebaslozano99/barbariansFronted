@@ -29,7 +29,7 @@ export default function ImageSlider({
 
         <div className={styles.imagesContainer} >
             <img 
-                // key={currIndex}
+                key={currIndex}
                 loading="lazy"
                 src={`http://localhost:5000/${images[currIndex].image_path}`} 
                 alt={images[currIndex].image_id} 

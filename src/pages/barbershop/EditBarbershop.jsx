@@ -3,6 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import PasswordInput from "../../components/PasswordInput";
 import CheckboxContainer from "../../components/CheckboxContainer";
 import useEditBarbershop from "../../hooks/useEditBarbershop";
+import { useNavigate } from "react-router-dom";
 
 
 const initialStates = {
@@ -12,7 +13,6 @@ const initialStates = {
   barbershopPhone: "",
   barbershopOpenTime: "08:00",
   barbershopCloseTime: "18:00",
-  // barberShopServices: [],
 }
 
 
@@ -54,11 +54,6 @@ function reducer(state, action){
         ...state,
         barbershopCloseTime: action.payload,
       };
-    
-    // case "barberShopServices/set":
-    //   return {
-    //     ...
-    //   }
 
     default: throw new Error("Unknown action type!");
   }
@@ -71,9 +66,13 @@ export default function EditBarbershop() {
   const { user } = useUserContext();
   const [images, setImages] = useState(null);
   const [services, setServices] = useState([]);
-  const [{ barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime }, dispatch] = useReducer(reducer, initialStates);
 
-  const { mutate, isPending } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services);
+  const [{ barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime }, dispatch] = useReducer(reducer, initialStates);
+  
+  const navigate = useNavigate();
+
+
+  const { mutate, isPending } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services, navigate);
 
 
   function handleCheckbox(e){
