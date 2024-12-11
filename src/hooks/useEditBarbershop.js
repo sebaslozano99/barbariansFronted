@@ -10,11 +10,13 @@ export default function useEditBarbershop(user_id, barbershopName, barbershopDes
       mutationFn: (e) => setupBarbershop(e, user_id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services),
 
       onSuccess: (data) => {
+        console.log(data);
         toast.success(data.message, { duration: 2000});
         navigate("/barbershop-profile");
       },
 
       onError: (error) => {
+        console.log(error);
         toast.error(error.message, { duration: 5000 });
       }
   }); 

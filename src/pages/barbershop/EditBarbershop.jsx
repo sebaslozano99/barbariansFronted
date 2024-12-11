@@ -1,9 +1,9 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import { useUserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput";
 import CheckboxContainer from "../../components/CheckboxContainer";
 import useEditBarbershop from "../../hooks/useEditBarbershop";
-import { useNavigate } from "react-router-dom";
 
 
 const initialStates = {
@@ -13,6 +13,8 @@ const initialStates = {
   barbershopPhone: "",
   barbershopOpenTime: "08:00",
   barbershopCloseTime: "18:00",
+  barbershopImages: null,
+  barbershopServices: []
 }
 
 
@@ -55,6 +57,24 @@ function reducer(state, action){
         barbershopCloseTime: action.payload,
       };
 
+    case "barbershopImages/set":
+      return {
+        ...state,
+        barbershopImages: action.payload,
+      };
+
+    case "barbershopServices/set":
+      return {
+        ...state,
+        barbershopServices: [...state.barbershopServices, action.payload]
+      };
+
+    case "barbershopServices/filter":
+      return {
+        ...state,
+        barbershopServices: state.barbershopServices.filter((service) => service.service !== action.payload)
+      };
+
     default: throw new Error("Unknown action type!");
   }
 }
@@ -63,29 +83,34 @@ function reducer(state, action){
 
 export default function EditBarbershop() {
 
-  const { user } = useUserContext();
-  const [images, setImages] = useState(null);
-  const [services, setServices] = useState([]);
 
-  const [{ barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime }, dispatch] = useReducer(reducer, initialStates);
-  
+  const { user } = useUserContext();
   const navigate = useNavigate();
 
+  const [{ 
+    barbershopName, 
+    barbershopDescription, 
+    barbershopAddress, 
+    barbershopPhone, 
+    barbershopOpenTime, 
+    barbershopCloseTime, 
+    barbershopImages, 
+    barbershopServices 
+  }, dispatch] = useReducer(reducer, initialStates);
 
-  const { mutate, isPending } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, images, services, navigate);
+  const { mutate, isPending } = useEditBarbershop(user?.id, barbershopName, barbershopDescription, barbershopAddress, barbershopPhone, barbershopOpenTime, barbershopCloseTime, barbershopImages, barbershopServices, navigate);
 
 
   function handleCheckbox(e){
     const { value, checked } = e.target;
 
     if(checked){
-      setServices((prevServices) => [...prevServices, { service: value, price: 20  } ]);
+      dispatch({type: "barbershopServices/set", payload: { service: value, price: 20 } });
     }
     else{
-      setServices((prevServices) => prevServices.filter((service) => service.service !== value));
+      dispatch({type: "barbershopServices/filter", payload: value });
     }
   }
-
 
 
   return (
@@ -174,7 +199,7 @@ export default function EditBarbershop() {
             multiple
             accept="image/jpg, image/jpeg"
             className="px-4 py-2 w-auto cursor-pointer"
-            onChange={(e) => setImages(e.target.files)}
+            onChange={(e) => dispatch({type: "barbershopImages/set", payload: e.target.files})}
             required 
           />
         </div>

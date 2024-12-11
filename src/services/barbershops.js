@@ -36,6 +36,7 @@ async function fetchBarbershopsProfile(user_id){
 async function setupBarbershop(e, user_id, name, description, address, phone, openTime, closeTime, images, services){
     e.preventDefault();
 
+
     // validations -----
     if(phone.length !== 10) throw new Error("Phone number must be 10 digits");
     if(services.length < 4) throw new Error("Select at least 4 services that you offered!");
