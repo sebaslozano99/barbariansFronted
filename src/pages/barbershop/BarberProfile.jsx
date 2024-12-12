@@ -4,6 +4,7 @@ import { IoHomeSharp } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
 import ImageSlider from "../../components/imageSlider/ImageSlider";
+import Button from "../../components/Button";
 
 
 
@@ -14,13 +15,13 @@ export default function BarberProfile() {
   const { data, isPending } = useFetchBarberProfile(user?.id);
 
 
-
   if(isPending) return <h1>Loading...!</h1>
 
+
   // if user hasn't set up barbershop, the API will return an object with a message property, otherwise a big object with all the info
-  if(data.message) return <main className="flex flex-col justify-center items-center p-10 w-full h-screen bg-gray-50">
+  if(!Object.keys(data).length) return <main className="flex flex-col justify-center items-center p-10 w-full h-screen bg-gray-50">
     <h2 className="text-7xl" >Set up your profile</h2>
-    <Link to="/barbershop-profile/edit" className="px-4 py-1.5 text-center w-40 bg-yellow-500" >Set up barbershop</Link>
+    <Link to="/barbershop-profile/setup" className="px-4 py-1.5 text-center w-40 bg-yellow-500" >Set up barbershop</Link>
   </main>
 
 
@@ -56,12 +57,7 @@ export default function BarberProfile() {
         </div>
 
         <div className="w-full flex justify-end" >
-          <Link 
-            to="/barbershop-profile/edit" 
-            className="py-1.5 px-5 text-xl w-auto bg-yellow-500" 
-          >
-            Edit Profile
-          </Link>
+          <Button type="link" linkTo="/barbershop-profile/edit" paddingX={25} bgColor="#EAB308" textColor="black" >Edit Profile</Button>
         </div>
 
       </div>

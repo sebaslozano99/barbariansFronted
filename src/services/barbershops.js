@@ -100,7 +100,8 @@ async function editBarbershopInfo(e, user_id, name, description, address, phone,
     // validations -----
     if(phone.length !== 10) throw new Error("Phone number must be 10 digits");
     if(openTime > closeTime) throw new Error("Open time cannot be later than Close time!");
- 
+    if(services.length > 0 && services.length < 4) throw new Error("Select at least 4 services!");
+
  
     const barbershopData = new FormData();
     barbershopData.append("business_name", name);

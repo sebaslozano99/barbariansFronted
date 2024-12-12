@@ -5,6 +5,9 @@ import PasswordInput from "../../components/PasswordInput";
 import CheckboxContainer from "../../components/CheckboxContainer";
 import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
 import useEditBarbershop from "../../hooks/useEditBarbershop";
+import Spinner from "../../components/Spinner";
+import Button from "../../components/Button";
+
 
 
 const initialStates = {
@@ -131,8 +134,8 @@ export default function EditBarbershop() {
 
 
 
-  if(isPending) return <main className="flex flex-col justify-center items-center gap-8 py-8 w-full h-auto bg-red--500 text-white">
-    Loading...
+  if(isPending) return <main className="flex flex-col justify-center items-center gap-8 py-8 w-full min-h-[90vh] bg-red--500 text-white">
+    <Spinner size={10} />
   </main>
 
 
@@ -230,14 +233,16 @@ export default function EditBarbershop() {
 
         <CheckboxContainer handleCheckbox={handleCheckbox} />
 
-        <div className="flex justify-end" >  
-          <button className="py-2 text-white w-20 bg-[#252525]" >
+        <div className="flex justify-end gap-3" >  
+
+          <Button type="link" linkTo="/barbershop-profile" paddingX={25} bgColor="#EAB308" textColor="black" >Back</Button>
+
+          <Button paddingX={25} >
             { isSaving  ? "Editing..." : "Edit" }
-          </button>
+          </Button>
+
         </div>
-
       </form> 
-
     </main>
   )
 }

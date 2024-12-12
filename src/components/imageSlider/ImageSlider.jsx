@@ -9,8 +9,6 @@ export default function ImageSlider({
 }) {
 
     const [currIndex, setCurrIndex] = useState(0);
-
-
     function handleIncrement(){
         setCurrIndex(prev => prev < images.length - 1 ? prev + 1 : 0);
     }
