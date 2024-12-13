@@ -5,7 +5,9 @@ import styles from "./imageSlider.module.css";
 
 
 export default function ImageSlider({
-    images
+    images,
+    width = "100%",
+    height = "100%"
 }) {
 
     const [currIndex, setCurrIndex] = useState(0);
@@ -20,7 +22,10 @@ export default function ImageSlider({
 
 
   return (
-    <div className={styles.mainContainer}>
+    <div 
+        className={styles.mainContainer}
+        style={{width, height}}
+    >
 
         <div className={styles.leftArrow} onClick={handleDecrement} >&#10092;</div>
         <div className={styles.rightArrow} onClick={handleIncrement} >&#10093;</div>
@@ -43,4 +48,6 @@ export default function ImageSlider({
 
 ImageSlider.propTypes = {
     images: PropTypes.array,
+    width: PropTypes.string,
+    height: PropTypes.string,
 }

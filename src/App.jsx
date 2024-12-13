@@ -26,6 +26,7 @@ const BarberProfile = lazy(() => import("./pages/barbershop/BarberProfile"));
 const BarberAppointments = lazy(() => import("./pages/barbershop/BarberAppointments"));
 const BarberReviews = lazy(() => import("./pages/barbershop/BarberReviews"));
 const EditBarbershop = lazy(() => import("./pages/barbershop/EditBarbershop"));
+const Barbers = lazy(() => import("./pages/users/Barbers"));
 
 
 // Components
@@ -56,7 +57,7 @@ export default function App() {
             <Routes>
 
               <Route path="/" element={ <Homepage />  } />
-              <Route path="/barbers" element={ <h1>Barbers</h1> } />
+              <Route path="/barbers" element={ <Barbers /> } />
               <Route path="/about" element={ <About /> } />
               <Route path="/contact" element={ <Contacts /> } />
 

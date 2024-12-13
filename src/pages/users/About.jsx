@@ -1,6 +1,10 @@
+
+
 export default function About() {
+
   return (
     <main className="w-full min-h-screen">
+      
       <div className={`flex justify-center items-center w-full h-[25em] bg-[linear-gradient(45deg,rgba(36,90,97,.5),rgba(0,19,34,.5)),url("/scissorsTwo.jpg")] bg-cover`} >
         <h2 className="text-white text-7xl font-bold" >ABOUT US</h2>
       </div>
