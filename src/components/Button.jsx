@@ -10,7 +10,6 @@ export default function Button({
   bgColor = "#252525", 
   textColor = "#fff",
   click, 
-  // classname,
   children
 
 }) {

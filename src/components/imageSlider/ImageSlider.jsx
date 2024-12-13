@@ -7,7 +7,8 @@ import styles from "./imageSlider.module.css";
 export default function ImageSlider({
     images,
     width = "100%",
-    height = "100%"
+    height = "100%",
+    borderRadius = 25
 }) {
 
     const [currIndex, setCurrIndex] = useState(0);
@@ -30,7 +31,7 @@ export default function ImageSlider({
         <div className={styles.leftArrow} onClick={handleDecrement} >&#10092;</div>
         <div className={styles.rightArrow} onClick={handleIncrement} >&#10093;</div>
 
-        <div className={styles.imagesContainer} >
+        <div className={styles.imagesContainer} style={{borderRadius: `${borderRadius}px`}} >
             <img 
                 key={currIndex}
                 loading="lazy"
@@ -49,5 +50,6 @@ export default function ImageSlider({
 ImageSlider.propTypes = {
     images: PropTypes.array,
     width: PropTypes.string,
+    borderRadius: PropTypes.number,
     height: PropTypes.string,
 }

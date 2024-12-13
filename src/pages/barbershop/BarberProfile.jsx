@@ -29,7 +29,7 @@ export default function BarberProfile() {
   return (
     <main className="flex gap-20 p-10 w-full h-screen bg-gray-50">
 
-      <ImageSlider images={data?.images} />
+      <ImageSlider images={data?.images} width="60%" height="80%"  />
 
       <div className="flex flex-col gap-8 p-1 w-[40%] h-[85%] overflow-y-auto profile" >
         <div>
