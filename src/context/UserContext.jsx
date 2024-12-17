@@ -16,7 +16,7 @@ const UserContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
-  isValidatingToken: true,
+  isValidatingToken: false,
 };
 
 

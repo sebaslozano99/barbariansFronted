@@ -1,11 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
+import LoadingPage from "../../components/LoadingPage";
+
 
 export default function BarbershopContainer() {
  
   const { user, isAuthenticated, isValidatingToken } = useUserContext();
 
-  if(isValidatingToken) return <h1 className="text-7xl text-red-500" >Loading...!</h1>
+  if(isValidatingToken) return <LoadingPage />
 
   if(user?.role === "user" || !isAuthenticated) return <Navigate to="/" replace />
 

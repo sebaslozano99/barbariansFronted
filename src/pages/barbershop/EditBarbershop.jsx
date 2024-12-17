@@ -5,8 +5,8 @@ import PasswordInput from "../../components/PasswordInput";
 import CheckboxContainer from "../../components/CheckboxContainer";
 import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
 import useEditBarbershop from "../../hooks/useEditBarbershop";
-import Spinner from "../../components/Spinner";
 import Button from "../../components/Button";
+import LoadingPage from "../../components/LoadingPage";
 
 
 
@@ -132,12 +132,7 @@ export default function EditBarbershop() {
 
 
 
-
-
-  if(isPending) return <main className="flex flex-col justify-center items-center gap-8 py-8 w-full min-h-[90vh] bg-red--500 text-white">
-    <Spinner size={10} />
-  </main>
-
+  if(isPending) return <LoadingPage />
 
 
   return (

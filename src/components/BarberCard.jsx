@@ -24,7 +24,7 @@ export default function BarberCard({barbershop}) {
 
       <div className="flex flex-wrap px-4" >
         {
-          services?.map((service) => <p className="mr-3" key={service.id} >#{service.service}</p>)
+          services?.map((service) => <p className="mr-3" key={service} >#{service}</p>)
         }
       </div>
 

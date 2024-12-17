@@ -34,6 +34,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LogInForm from "./components/LogInForm";
 import SignupForm from "./components/SignupForm";
+import LoadingPage from "./components/LoadingPage";
+import SingleBarbershop from "./pages/users/SingleBarbershop";
 
 
 
@@ -51,13 +53,14 @@ export default function App() {
     <QueryClientProvider client={queryClient} >
       <UserProvider>
         <BrowserRouter>
-          <Suspense fallback={ <h1>Loading...</h1> } >
+          <Suspense fallback={ <LoadingPage /> } >
 
             <Header />
             <Routes>
 
               <Route path="/" element={ <Homepage />  } />
               <Route path="/barbers" element={ <Barbers /> } />
+              <Route path="/barbers/:barbershop_id" element={ <SingleBarbershop /> } />
               <Route path="/about" element={ <About /> } />
               <Route path="/contact" element={ <Contacts /> } />
 

@@ -5,6 +5,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import useFetchBarberProfile from "../../hooks/useFetchBarberProfile";
 import ImageSlider from "../../components/imageSlider/ImageSlider";
 import Button from "../../components/Button";
+import LoadingPage from "../../components/LoadingPage";
 
 
 
@@ -15,15 +16,13 @@ export default function BarberProfile() {
   const { data, isPending } = useFetchBarberProfile(user?.id);
 
 
-  if(isPending) return <h1>Loading...!</h1>
+  if(isPending) return <LoadingPage />
 
 
-  // if user hasn't set up barbershop, the API will return an object with a message property, otherwise a big object with all the info
   if(!Object.keys(data).length) return <main className="flex flex-col justify-center items-center p-10 w-full h-screen bg-gray-50">
     <h2 className="text-7xl" >Set up your profile</h2>
     <Link to="/barbershop-profile/setup" className="px-4 py-1.5 text-center w-40 bg-yellow-500" >Set up barbershop</Link>
   </main>
-
 
 
   return (
