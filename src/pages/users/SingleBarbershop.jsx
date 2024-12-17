@@ -7,7 +7,8 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { IoIosTime } from "react-icons/io";
 import LoadingPage from "../../components/LoadingPage";
 import ImageSlider from "../../components/imageSlider/ImageSlider";
-import { useEffect } from "react";
+import phoneFormatter from "../../utils/phoneFormatter";
+
 
 
 
@@ -21,10 +22,6 @@ export default function SingleBarbershop() {
     retry: 1
   });
 
-
-  useEffect(() => {
-    console.log(data?.services);
-  }, [data?.services])
 
 
   if(isPending) return <LoadingPage />
@@ -43,9 +40,8 @@ export default function SingleBarbershop() {
           <div className="flex gap-20" >
             <div className="flex flex-col gap-3" >
               <p className="flex items-center gap-4 text-lg" > <IoHomeSharp size={25} /> {data.address} </p>
-              <p className="flex items-center gap-4 text-lg" > <BsFillTelephoneFill size={25} /> {data.phone} </p>
+              <p className="flex items-center gap-4 text-lg" > <BsFillTelephoneFill size={25} /> {phoneFormatter(data.phone)} </p>
             </div>
-
 
             <div className="flex flex-col gap-3" >
               <p className="flex items-center gap-4 text-lg" > <IoTime size={25} /> {data.open_time} AM </p>
@@ -60,7 +56,7 @@ export default function SingleBarbershop() {
 
             <div>
               {
-                data.services?.map((service) => <p className="text-lg" key={service.service} >{service.service} - ${service.price}</p>)
+                data.services?.map((service) => <p className="flex justify-between text-lg" key={service.service} > <span>{service.service}</span>  <span>${service.price}</span></p>)
               }
             </div>
 
